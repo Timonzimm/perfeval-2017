@@ -10,7 +10,7 @@ from sklearn.linear_model import LinearRegression
 parser = AdvancedHTMLParser.AdvancedHTMLParser()
 
 param={'sciper': 223720, 'clients': 1, 'apoints': 1, 'servers': 1}
-columns=['Theta', 'Packets per second', 'Collision probability', 'Delay']
+columns=['Successful download requests per second', 'Packets per second', 'Collision probability', 'Delay']
 
 
 def sameReq(nbReq, param): 
@@ -23,8 +23,6 @@ def sameReq(nbReq, param):
         results.append( [float(t[11]), float(t[13]), float(t[15]), float(t[17])] )
     return results
 
-
-
 def deffReq(nbReq, param, field, step):
     results = []
     for i in range (nbReq):
@@ -36,30 +34,33 @@ def deffReq(nbReq, param, field, step):
         results.append( [float(t[11]), float(t[13]), float(t[15]), float(t[17])] )
     return results
 
-def plotBox(data, labels, path):
+def plotBox(data, labels, path, title='Test'):
     df = pd.DataFrame(data, columns=[labels])
-    df.plot.box()
-    plt.savefig(path, format='svg', dpi=1200)
+    ax = df.plot.box(colormap='jet',title=title)
+    ax.grid()
+    plt.savefig(path, format='svg', dpi=800)
 
-def plotSeries(data, labels, path):
+def plotSeries(data, labels, path, x, y, title='Test'):
     df = pd.DataFrame(data, columns=labels)
-    df.plot()
-    plt.savefig(path, format='svg', dpi=1200)
-
+    ax = df.plot(lw=1,colormap='jet',marker='.',markersize=6,title=title)
+    ax.set_xlabel(x)
+    ax.set_ylabel(y)
+    ax.grid()
+    plt.savefig(path, format='svg', dpi=800)
 
 def plotQ1():
     t = sameReq(1000, param)
     t = zip(*t)
     t = zip(t, columns)
     for x in t:
-        plotSeries(list(x[0]), [x[1]], './Q1/{0}.svg'.format(x[1]))
+        plotBox(list(x[0]), [x[1]], './Q1/{0}.svg'.format(x[1]))
 
 def plotQ2():
     t = deffReq(1000, param, 'clients', 1)
     t = zip(*t)
     t = zip(t, columns)
     for x in t:
-        plotSeries(list(x[0]), [x[1]], './Q2/{0}.svg'.format(x[1]))
+        plotSeries(list(x[0]), [x[1]], './Q2/{0}.svg'.format(x[1]), x='Number of clients', y=x[1])
 
 def plotQ3():
     params = [copy.deepcopy(param),
@@ -102,5 +103,5 @@ def test():
 
     plt.savefig('./test/ratio.svg', format='svg', dpi=1200)
 
-plotQ1()
+#plotQ1()
 plotQ2()
