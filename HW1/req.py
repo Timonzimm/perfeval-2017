@@ -42,7 +42,7 @@ def plotBox(data, labels, path, title='Test'):
 
 def plotSeries(data, labels, path, x, y, title='Test'):
     df = pd.DataFrame(data, columns=labels)
-    ax = df.plot(lw=1,colormap='jet',marker='.',markersize=6,title=title)
+    ax = df.plot(lw=1,colormap='jet',marker='.',markersize=6,title=title, x=np.arange(1, 1000, 10))
     ax.set_xlabel(x)
     ax.set_ylabel(y)
     ax.grid()
@@ -56,7 +56,7 @@ def plotQ1():
         plotBox(list(x[0]), [x[1]], './Q1/{0}.svg'.format(x[1]))
 
 def plotQ2():
-    t = deffReq(1000, param, 'clients', 1)
+    t = deffReq(100, param, 'clients', 10)
     t = zip(*t)
     t = zip(t, columns)
     for x in t:
@@ -75,20 +75,20 @@ def plotQ3():
     thetas=[]; pps=[]; cp=[]; d=[]
     print('toz')
     for p in params:
-        t = deffReq(1000, p, 'clients', 1)
+        t = deffReq(100, p, 'clients', 10)
         print('r')
         thetas.append([x[0] for x in t])
         pps.append([x[1] for x in t])
         cp.append([x[2] for x in t])
         d.append([x[3] for x in t])
-    plotSeries(np.asarray(thetas).transpose(), ['1','2','4','8'], './Q3/{0}.svg'.format(columns[0]))
-    plotSeries(np.asarray(pps).transpose(), ['1','2','4','8'], './Q3/{0}.svg'.format(columns[1]))
-    plotSeries(np.asarray(cp).transpose(), ['1','2','4','8'], './Q3/{0}.svg'.format(columns[2]))
-    plotSeries(np.asarray(d).transpose(), ['1','2','4','8'], './Q3/{0}.svg'.format(columns[3]))
+    plotSeries(np.asarray(thetas).transpose(), ['1','2','4','8'], './Q3/{0}.svg'.format(columns[0]), x='Number of clients', y=columns[0])
+    plotSeries(np.asarray(pps).transpose(), ['1','2','4','8'], './Q3/{0}.svg'.format(columns[1]), x='Number of clients', y=columns[1])
+    plotSeries(np.asarray(cp).transpose(), ['1','2','4','8'], './Q3/{0}.svg'.format(columns[2]), x='Number of clients', y=columns[2])
+    plotSeries(np.asarray(d).transpose(), ['1','2','4','8'], './Q3/{0}.svg'.format(columns[3]), x='Number of clients', y=columns[3])
 
 
 def test():
-    t = deffReq(1000, param, 'clients', 1)
+    t = deffReq(100, param, 'clients', 10)
     theta = [x[0] for x in t]
     pps = [x[1] for x in t]
     ratio = [y[0] / y[1] if y[1] != 0 else 0 for y in zip(theta,pps)]
@@ -97,11 +97,25 @@ def test():
     reg = LinearRegression() 
     reg.fit(X, Y)
 
-    plt.ylim(0, 0.5)
-    plt.scatter(X, Y,  color='blue')
-    plt.plot(X, reg.predict(X), color='red', linewidth=3)
+    '''plt.ylim(0, 0.3)
+    plt.scatter(X, Y,  color='blue', s=2)
+    plt.plot(X, reg.predict(X), color='red', linewidth=2)
 
-    plt.savefig('./test/ratio.svg', format='svg', dpi=1200)
+    plt.savefig('./test/ratio.svg', format='svg', dpi=1200)'''
+
+    df1 = pd.DataFrame(Y)
+    df2 = pd.DataFrame(reg.predict(X))
+
+    ax = df1.plot(lw=1,colormap='jet',marker='.',markersize=6, x=np.arange(1, 1000, 10), title='Ratio of successful download per number of packets sent')
+    df2.plot(lw=1, x=np.arange(1, 1000, 10), ax=ax, color='red')
+    ax.grid()
+
+    plt.savefig('./test/ratio.svg', format='svg', dpi=800)
+
+    
+
 
 #plotQ1()
-plotQ2()
+#plotQ2()
+#plotQ3()
+test()
