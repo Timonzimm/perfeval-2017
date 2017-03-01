@@ -88,27 +88,70 @@ def fetchDataQ3():
     res = []
 
     for p in params:
-        res.append(mean(10, 1001, paramBase, 'clients', 1))
+        res.append(mean(10, 1001, p, 'clients', 1))
     
     res = np.asarray(res)
 
     np.save('./Q3/data', res)
 
+def plotSeries(data, labels, path, x, y, title='Test'):
+    df = pd.DataFrame(data, columns=labels)
+    ax = df.plot(lw=0.5,colormap='jet',marker='.',markersize=0,title=title)
+    ax.set_xlabel(x)
+    ax.set_ylabel(y)
+    ax.grid()
+    plt.savefig(path, format='svg', dpi=800)
+
+def plotSwag(mean, std, labels, path, x, y, title='Test'):
+    trials = np.array(range(len(mean))) + 1
+    fig, ax = plt.subplots(1, 1)
+    ax.set_title('Test')
+    ax.set_xlabel(x)
+    ax.set_ylabel(y)
+    ax.grid()
+    ax.fill_between(trials, mean - std, mean + std, alpha=0.1, color="g")
+    ax.plot(trials, mean, '-', color="g", linewidth=1)
+    plt.savefig(path, format='svg', dpi=800)
+
+def plotQ2():
+    res = np.load('./Q2/data.npy')
+    '''res = res[0]
+    res = res.transpose()
+    print(res.shape)
+    for i in range(4):
+        plotSeries(res[i], [columns[i]], 
+        './Q2/{0}.svg'.format(columns[i]), x='Number of clients', y=columns[i])'''
+    mean = res.mean(0).transpose()
+    std = res.std(0).transpose()
+    for i in range(4):
+        plotSwag(mean[i], std[i], [columns[i]], 
+        './Q2/{0}.svg'.format(columns[i]), x='Number of clients', y=columns[i])
+
+
+
+
 
 def plotQ3():
-
     res = np.load('./Q3/data.npy')
     print(np.shape(res))
     resMean = np.mean(res, 1)
+    resMean = np.asarray([res[0][0], res[1][0], res[2][0], res[3][0]])
     print(np.shape(resMean))
+    resMean = np.transpose(resMean, (0,2,1))
 
-    r = resMean.tolist()
-    ap1, ap2, ap4, ap8 = [r[0], r[1], r[2], r[3]]
+    def extract(dim):
+        res = []
+        for x in range(4):
+            res.append(resMean[x][dim])
+        return np.asarray(res)
+    
+    thetas = extract(0)
+    pps = extract(1)
+    cp = extract(2)
+    d = extract(3)
+    plotSeries(np.asarray(thetas).transpose(), ['1','2','4','8'], './Q3/{0}.svg'.format(columns[0]), x='Number of clients', y=columns[0])
+    plotSeries(np.asarray(pps).transpose(), ['1','2','4','8'], './Q3/{0}.svg'.format(columns[1]), x='Number of clients', y=columns[1])
+    plotSeries(np.asarray(cp).transpose(), ['1','2','4','8'], './Q3/{0}.svg'.format(columns[2]), x='Number of clients', y=columns[2])
+    plotSeries(np.asarray(d).transpose(), ['1','2','4','8'], './Q3/{0}.svg'.format(columns[3]), x='Number of clients', y=columns[3])
 
-    def mergeAp(dim):
-        return [[ap1[dim], ap2[dim], ap4[dim], ap8[dim]] for x in ap1]
-
-    theta = mergeAp(1)
-    print(np.shape(theta))
-
-plotQ3()
+plotQ2()
