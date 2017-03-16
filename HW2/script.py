@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+import matplotlib
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 
@@ -23,7 +25,7 @@ def wp_sim(width, sciper, end_time):
     v_max = 1.9 + 0.1 * (sciper%11)
 
     M = np.random.uniform(0, width, 2)
-    V = np.random.uniform(v_min, v_max, 1)[0]
+    V = np.random.uniform(v_min, v_max)
     T = 0
 
     while True:
@@ -33,7 +35,7 @@ def wp_sim(width, sciper, end_time):
         M_t = np.random.uniform(0, width, 2)
         T = T + (np.linalg.norm(M - M_t) / V)
         M = M_t
-        V = np.random.uniform(v_min, v_max, 1)[0]
+        V = np.random.uniform(v_min, v_max)
 
 
 
@@ -52,8 +54,29 @@ def wp_n_sim(N):
 
 def Q2():
     sims = wp_n_sim(100)
-    mean = [x.shape[0] for x in sims]
-    print(np.mean(mean))
+    waypoints_numbers = [x.shape[0] for x in sims]
+    max_ = np.max(waypoints_numbers)
+    min_ = np.min(waypoints_numbers)
+    mean = np.mean(waypoints_numbers)
+
+
+    COLOR='blue'
+    RESFACT=10
+    MAP='winter' # choose carefully, or color transitions will not appear smoooth
+
+    sim = sims[0]
+    x = sim[:,0]
+    y = sim[:,1]
+
+    cm = plt.get_cmap(MAP)
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    ax.set_color_cycle([cm(1.*i/(len(x)-1)) for i in range(len(x)-1)])
+    for i in range(len(x)-1):
+      ax.plot(x[i:i+2],y[i:i+2])
+
+    plt.show()
+    plt.close()
 
     '''for i in range(10):
         x = sims[i][:,0]
