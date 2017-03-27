@@ -6,9 +6,9 @@ matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 max_arrivals = 10000 # max number of request arrivals (set to 10⁴ from the homework description)
-lambda_ = 70000 # Exponential parameter, arrival rate
-log_normal = (2, 0.5) # Log-normal parameters mu and sigma, type 1 process service time
-uniform = (0.7, 0.9) # Uniform parameters, type 2 process service time
+lambda_ = 250 # Exponential parameter, arrival rate
+log_normal = (2 / 1000.0, 0.5 / 1000.0) # Log-normal parameters mu and sigma, type 1 process service time
+uniform = (0.7 / 1000.0, 0.9 / 1000.0) # Uniform parameters, type 2 process service time
 
 waiting_requests = deque([])
 done_requests = deque([])
@@ -69,7 +69,9 @@ while len(waiting_requests) > 0:
     index = get_index(waiting_requests, processing)
 
     waiting_requests.insert(index, processing)
-    processes.append((processing.service_time[0], 0, -1, +1))
+
+    processes.append((processing.service_time[0], -1, -1, 0))
+    processes.append((last_end_service_time, +1, 0, +1))
 
   elif processing.type_ == 2:
     processing.service_time[1] = max(last_end_service_time, processing.arrival_time[1])
@@ -77,7 +79,9 @@ while len(waiting_requests) > 0:
     last_end_service_time = processing.service_time[1] + processing.service_duration[1]
 
     done_requests.appendleft(processing)
+
     processes.append((processing.service_time[1], -1, 0, -1))
+    processes.append((last_end_service_time, 0, 0, 0))
 
     if processing.arrival_time[1] != processing.service_time[0] + processing.service_duration[0]:
       print("ERROR 1")
