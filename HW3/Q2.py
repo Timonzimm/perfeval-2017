@@ -20,7 +20,7 @@ for i, lambda_ in enumerate(range(50, 251, 50)):
   df_final = pd.DataFrame()
   df_final['Time'] = df['time']
   df_final['Total number of process in queue'] = df['change all'].cumsum(axis=0)
-  print(int(i/2), int(i%2))
+
   df_final.plot(x='Time', ax=axes[int(i/2), int(i%2)])
   axes[int(i/2), int(i%2)].set_title("λ = {}".format(lambda_))
 
