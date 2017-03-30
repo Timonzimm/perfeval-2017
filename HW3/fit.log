@@ -1,0 +1,270 @@
+
+
+*******************************************************************************
+Thu Mar 30 18:51:15 2017
+
+
+FIT:    data read from 'test_n50_l70'
+        format = z
+        #datapoints = 142065
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*x^2 + b*x +c
+fitted parameters initialized with current variable values
+
+
+
+*******************************************************************************
+Thu Mar 30 18:51:29 2017
+
+
+FIT:    data read from 'test_n50_l70'
+        format = z
+        #datapoints = 142065
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*x^2 + b*x +c
+BREAK: Need via and either parameter list or file
+
+*******************************************************************************
+Thu Mar 30 18:51:33 2017
+
+
+FIT:    data read from 'test_n50_l70'
+        format = z
+        #datapoints = 142065
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*x^2 + b*x +c
+fitted parameters initialized with current variable values
+
+
+
+*******************************************************************************
+Thu Mar 30 18:51:49 2017
+
+
+FIT:    data read from 'test_n50_l70'
+        format = z
+        #datapoints = 142065
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*x^2
+fitted parameters initialized with current variable values
+
+
+
+*******************************************************************************
+Thu Mar 30 18:52:38 2017
+
+
+FIT:    data read from 'test_n50_l70'
+        format = z
+        #datapoints = 142065
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*x**2 + b*x +c
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a             b             c            
+   0 1.1573520199e+25   0.00e+00  5.21e+09    1.000000e+00   1.000000e+00   1.000000e+00
+  11 3.9900693825e+03  -5.32e-04  5.21e-02   -4.663138e-12   5.640598e-07   1.154036e+00
+
+After 11 iterations the fit converged.
+final sum of squares of residuals : 3990.07
+rel. change during last iteration : -5.32227e-09
+
+degrees of freedom    (FIT_NDF)                        : 142062
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.167591
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0280868
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = -4.66314e-12     +/- 2.956e-13    (6.339%)
+b               = 5.6406e-07       +/- 4.337e-08    (7.689%)
+c               = 1.15404          +/- 0.001334     (0.1156%)
+
+correlation matrix of the fit parameters:
+                a      b      c      
+a               1.000 
+b              -0.968  1.000 
+c               0.745 -0.866  1.000 
+
+
+*******************************************************************************
+Thu Mar 30 18:54:38 2017
+
+
+FIT:    data read from 'test_n50_l70'
+        format = z
+        #datapoints = 142065
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * log(b * x) + c
+fitted parameters initialized with current variable values
+
+
+Current data point
+=========================
+#               = 1 out of 142065
+x               = -4.66314e-12   
+z               = 0              
+
+Current set of parameters
+=========================
+a               = -4.66314e-12   
+b               = 5.6406e-07     
+c               = 1.15404        
+
+BREAK: Undefined value during function evaluation
+
+*******************************************************************************
+Thu Mar 30 18:54:59 2017
+
+
+FIT:    data read from 'test_n50_l70'
+        format = z
+        x range restricted to [0.00000 : *]
+        #datapoints = 142065
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * log(b * x) + c
+fitted parameters initialized with current variable values
+
+
+Current data point
+=========================
+#               = 1 out of 142065
+x               = -4.66314e-12   
+z               = 0              
+
+Current set of parameters
+=========================
+a               = -4.66314e-12   
+b               = 5.6406e-07     
+c               = 1.15404        
+
+BREAK: Undefined value during function evaluation
+
+*******************************************************************************
+Thu Mar 30 18:55:33 2017
+
+
+FIT:    data read from 'test_n50_l70'
+        format = z
+        x range restricted to [0.00000 : *]
+        #datapoints = 142065
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = d * log(e * x) + f
+fitted parameters initialized with current variable values
+
+
+Current data point
+=========================
+#               = 1 out of 142065
+x               = 1              
+z               = 0              
+
+Current set of parameters
+=========================
+d               = 1              
+e               = 1              
+f               = 1              
+
+BREAK: Undefined value during function evaluation
+
+*******************************************************************************
+Thu Mar 30 18:55:54 2017
+
+
+FIT:    data read from 'test_n50_l70'
+        format = z
+        x range restricted to [0.00000 : *]
+        #datapoints = 142065
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = d * log(abs(e * x)) + f
+fitted parameters initialized with current variable values
+
+
+Current data point
+=========================
+#               = 1 out of 142065
+x               = 1              
+z               = 0              
+
+Current set of parameters
+=========================
+d               = 1              
+e               = 1              
+f               = 1              
+
+BREAK: Undefined value during function evaluation
+
+*******************************************************************************
+Thu Mar 30 18:56:37 2017
+
+
+FIT:    data read from 'test_n50_l70'
+        format = z
+        x range restricted to [0.00000 : *]
+        #datapoints = 142065
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = d * log(abs(e * x)) + f
+fitted parameters initialized with current variable values
+
+
+Current data point
+=========================
+#               = 1 out of 142065
+x               = 1              
+z               = 0              
+
+Current set of parameters
+=========================
+d               = 1              
+e               = 1              
+f               = 1              
+
+BREAK: Undefined value during function evaluation
+
+*******************************************************************************
+Thu Mar 30 18:57:38 2017
+
+
+FIT:    data read from 'test_n50_l70' using 0:1
+        format = x:z
+        x range restricted to [0.00000 : *]
+        #datapoints = 142065
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = d * log(abs(e * x)) + f
+fitted parameters initialized with current variable values
+
+
+Current data point
+=========================
+#               = 1 out of 142065
+x               = 1              
+z               = 0              
+
+Current set of parameters
+=========================
+d               = 1              
+e               = 1              
+f               = 1              
+
+BREAK: Undefined value during function evaluation

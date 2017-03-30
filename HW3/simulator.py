@@ -60,6 +60,7 @@ class Simulator:
       return len(q)
 
     for i in range(num_run):
+      print('run number {}'.format(i))
       self.__reset__()
 
       last_end_service_time = self.waiting_requests[-1].arrival_time[0]
