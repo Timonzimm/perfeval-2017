@@ -40,5 +40,5 @@ print("Average response time (waiting + service time) for type 1 job: {} ms".for
 print("Average response time (waiting + service time) for type 2 job: {} ms".format(mean_response_time_type_2))
 
 # POINT 2 bis
-print("Average type 1 job served per second: {}".format(1/mean_response_time_type_1 * 1000))
-print("Average type 2 job served per second: {}".format(1/mean_response_time_type_2 * 1000))
+print("Average type 1 jobs served per second: {}".format(1/mean_response_time_type_1 * 1000))
+print("Average type 2 jobs served per second: {}".format(1/mean_response_time_type_2 * 1000))
