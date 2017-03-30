@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from simulator import Simulator
 
-sim = Simulator()
+sim = Simulator(lambda_=108)
 results = sim.simulate(num_run=1)
 
 done_requests, types_deltas_inq = results[0]
@@ -31,6 +31,11 @@ df_final['Number of type 2 process in queue'] = df['change type 2'].cumsum(axis=
 df_final.plot(x='Time')
 plt.show()
 
+
+sim = Simulator(lambda_=70)
+results = sim.simulate(num_run=1)
+
+done_requests, types_deltas_inq = results[0]
 # POINT 1 bis
 mean_response_time_type_1 = np.mean([Request.arrival_time[1] - Request.arrival_time[0] for Request in done_requests])
 mean_response_time_type_2 = np.mean([Request.service_time[1] + Request.service_duration[1] - Request.arrival_time[1] for Request in done_requests])

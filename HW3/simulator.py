@@ -3,7 +3,7 @@ from collections import deque
 from request import Request
 
 class Simulator:
-  def __init__(self, max_arrivals=10000, lambda_ = 108, log_normal=(2, 0.5), uniform=(0.7, 0.9)):
+  def __init__(self, max_arrivals=10000, lambda_ = 70, log_normal=(2, 0.5), uniform=(0.7, 0.9)):
     self.max_arrivals = max_arrivals # max number of request arrivals (set to 10⁴ from the homework description)
     self.lambda_ = lambda_ / 1000 # Exponential parameter, arrival rate (109 req/s stat. vs 110 req/s transient)
     self.log_normal = log_normal # Log-normal parameters mu and sigma, type 1 process service time
