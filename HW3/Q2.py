@@ -18,11 +18,11 @@ for i, lambda_ in enumerate(range(50, 251, 25)):
   df = df.sort_values(by='time')
 
   df_final = pd.DataFrame()
-  df_final['Time'] = df['time']
+  df_final['Time (ms)'] = df['time']
   df_final['Total number of process in queue'] = df['change all'].cumsum(axis=0)
 
-  df_final.plot(x='Time', ax=axes[int(i/2), int(i%3)])
-  axes[int(i/2), int(i%3)].set_title("λ = {}".format(lambda_))
+  print(int(i/3), int(i%3))
+  df_final.iloc[::1000, :].plot(x='Time (ms)', ax=axes[int(i/3), int(i%3)])
+  axes[int(i/3), int(i%3)].set_title("λ = {} req/s".format(lambda_))
 
-axes[2,1].axis('off')
 plt.show()

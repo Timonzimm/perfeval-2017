@@ -15,20 +15,22 @@ done_requests, types_deltas_inq = results[0]
 arrivals_type_1 = [Request.arrival_time[0] for Request in done_requests]
 departures_type_2 = [Request.service_time[1] + Request.service_duration[1] for Request in done_requests]
 
-plt.plot(arrivals_type_1, list(range(1, len(done_requests) + 1)))
-plt.plot(departures_type_2, list(range(len(done_requests), 0, -1)))
-
+plt.plot(arrivals_type_1, list(range(1, len(done_requests) + 1)), label="Number of requests arrived")
+plt.plot(departures_type_2, list(range(len(done_requests), 0, -1)), label="Number of requests served")
+plt.legend(loc='best', frameon=False)
+plt.xlabel("Time (ms)")
 plt.show()
+
 # POINT 2
 df = pd.DataFrame(types_deltas_inq, columns=['time', 'change all', 'change type 1', 'change type 2'])
 df = df.sort_values(by='time')
 
 df_final = pd.DataFrame()
-df_final['Time'] = df['time']
+df_final['Time (ms)'] = df['time']
 df_final['Total number of process in queue'] = df['change all'].cumsum(axis=0)
 df_final['Number of type 1 process in queue'] = df['change type 1'].cumsum(axis=0)
 df_final['Number of type 2 process in queue'] = df['change type 2'].cumsum(axis=0)
-df_final.iloc[::1000, :].plot(x='Time')
+df_final.iloc[::1000, :].plot(x='Time (ms)')
 plt.show()
 
 
