@@ -10,7 +10,7 @@ def first_positive(N):
       return i, n
   return len(N), N[-1]
 
-values = np.loadtxt('HW3/test_n50_l108.out')[::2000]
+values = np.loadtxt('HW3/test_n50_l70.out')[::2000]
 dev2 = np.diff(values, 2)
 
 # compute the cut by taking the first time the second derivative is positive
