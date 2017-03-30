@@ -48,7 +48,8 @@ class Simulator:
         arrival_time=t,
         service_duration=[np.random.lognormal(mean=self.log_normal[0], sigma=self.log_normal[1]), np.random.uniform(low=self.uniform[0], high=self.uniform[1])],
         id=i+1))
-
+        
+  @profile
   def simulate(self, num_run=1):
     res = []
 

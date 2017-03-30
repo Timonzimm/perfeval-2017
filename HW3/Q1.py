@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from simulator import Simulator
 
-sim = Simulator(lambda_=108)
+sim = Simulator(lambda_=70)
 results = sim.simulate(num_run=1)
 
 done_requests, types_deltas_inq = results[0]
@@ -28,19 +28,17 @@ df_final['Time'] = df['time']
 df_final['Total number of process in queue'] = df['change all'].cumsum(axis=0)
 df_final['Number of type 1 process in queue'] = df['change type 1'].cumsum(axis=0)
 df_final['Number of type 2 process in queue'] = df['change type 2'].cumsum(axis=0)
-df_final.plot(x='Time')
+df_final.iloc[::1000, :].plot(x='Time')
 plt.show()
 
 
-sim = Simulator(lambda_=70)
-results = sim.simulate(num_run=1)
-
-done_requests, types_deltas_inq = results[0]
 # POINT 1 bis
 mean_response_time_type_1 = np.mean([Request.arrival_time[1] - Request.arrival_time[0] for Request in done_requests])
 mean_response_time_type_2 = np.mean([Request.service_time[1] + Request.service_duration[1] - Request.arrival_time[1] for Request in done_requests])
 
 print("Average response time (waiting + service time) for type 1 job: {} ms".format(mean_response_time_type_1))
 print("Average response time (waiting + service time) for type 2 job: {} ms".format(mean_response_time_type_2))
+print("Average type 1 job served per second: {}".format(1/mean_response_time_type_1 * 1000))
+print("Average type 2 job served per second: {}".format(1/mean_response_time_type_2 * 1000))
 
 # POINT 2 bis
