@@ -3,47 +3,20 @@ matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from simulator import Simulator
 
+def first_positive(N):
+  for i, n in enumerate(N):
+    if n >= 0:
+      return i, n
+  return len(N), N[-1]
 
-def ci_lambda(l, n):
-    sim = Simulator(lambda_=l)
-    res = sim.simulate(num_run=n)
+values = np.loadtxt('HW3/test_n50_l108.out')[::2000]
+dev2 = np.diff(values, 2)
 
-    res = [sorted(x[1], key=lambda tup: tup[0]) for x in res]
+# compute the cut by taking the first time the second derivative is positive
+cut_index, cut_value = first_positive(dev2)
 
-    times = [[x[0] for x in y] for y in res]
-    changes_1 = [[x[2] for x in y] for y in res]
-    changes_2 = [[x[3] for x in y] for y in res]
-
-    tests = []
-    for i in range(len(changes_1)):
-        idx = np.searchsorted(times[i], np.arange(times[0][-1]))
-        idx = np.clip(idx, 1, len(changes_1[i])-1) 
-        t = np.cumsum(changes_1[i])[idx]
-        tests.append(t)
-
-    m = np.mean(tests, 0)
-'''    print('cov')
-    t = np.convolve(m, np.ones(50)*(1/50))'''
-    
-    plt.plot( )
-    plt.show()
-
-    plt.plot(times[0])
-    plt.show()
-
-    plt.plot(np.cumsum(changes_1[0]))
-    plt.show()
-
-    plt.plot(np.cumsum(changes_1[1]))
-    plt.show()
-
-    mean_changes_1 = [np.mean(np.cumsum(x)) for x in changes_1]
-    mean_changes_2 = [np.mean(np.cumsum(x)) for x in changes_2]
-    
-    print('Averages of type 1 in system: {}'.format(mean_changes_1))
-    print('Averages of type 2 in system: {}'.format(mean_changes_2))
-
-
-
+plt.axvline(x=cut_index, label="Values", linestyle="--", color="red")
+plt.plot(values)
+#plt.plot(dev2, label="2nd derivative")
+plt.show()
