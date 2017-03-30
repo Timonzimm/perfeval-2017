@@ -38,7 +38,7 @@ mean_response_time_type_2 = np.mean([Request.service_time[1] + Request.service_d
 
 print("Average response time (waiting + service time) for type 1 job: {} ms".format(mean_response_time_type_1))
 print("Average response time (waiting + service time) for type 2 job: {} ms".format(mean_response_time_type_2))
-print("Average type 1 job served per second: {}".format(1/mean_response_time_type_1 * 1000))
-print("Average type 2 job served per second: {}".format(1/mean_response_time_type_2 * 1000))
 
 # POINT 2 bis
+print("Average type 1 job served per second: {}".format(1/mean_response_time_type_1 * 1000))
+print("Average type 2 job served per second: {}".format(1/mean_response_time_type_2 * 1000))
