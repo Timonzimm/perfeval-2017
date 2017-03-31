@@ -63,9 +63,3 @@ def ci():
     print('Confidence inverval for the mediane at lambda = 108: {}', ci108_mean)
 
 ci()
-
-
-
-
-
-
