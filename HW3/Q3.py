@@ -57,9 +57,9 @@ def ci():
     ci108_med = ci_med(l108)
     ci108_mean = ci_mean(l108)
 
-    print('Confidence inverval for the mediane at lambda = 70: {}', ci70_med)
-    print('Confidence inverval for the mean at lambda = 70: {}', ci70_mean)
-    print('Confidence inverval for the mediane at lambda = 108: {}', ci108_med)
-    print('Confidence inverval for the mediane at lambda = 108: {}', ci108_mean)
+    print('Confidence inverval for the mediane at lambda = 70: {}'.format(ci70_med))
+    print('Confidence inverval for the mean at lambda = 70: {}'.format(ci70_mean))
+    print('Confidence inverval for the mediane at lambda = 108: {}'.format(ci108_med))
+    print('Confidence inverval for the mediane at lambda = 108: {}'.format(ci108_mean))
 
 ci()
