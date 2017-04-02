@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-l70 = np.loadtxt('n50_l70.gz')
+l70 = np.loadtxt('n50_l70.gz')[::1000]
 l108 = np.loadtxt('n50_l108.gz')
 
 def first_positive(N):
@@ -18,7 +18,7 @@ dev2 = np.diff(l70, 2)
 # compute the cut by taking the first time the second derivative is positive
 cut_index, cut_value = first_positive(dev2)
 
-plt.axvline(x=cut_index, label="Values", linestyle="--", color="red")
-plt.plot(l70)
+#plt.axvline(x=cut_index, label="Values", linestyle="--", color="red")
+plt.plot(l70[cut_index:])
 #plt.plot(dev2, label="2nd derivative")
 plt.show()
