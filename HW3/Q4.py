@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 
 l70 = np.loadtxt('n50_l70.gz')[::1000]
-l108 = np.loadtxt('n50_l108.gz')[::1000]
+#l108 = np.loadtxt('n50_l108.gz')[::1000]
 
 def first_positive(N):
   for i, n in enumerate(N):

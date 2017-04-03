@@ -1,4 +1,0 @@
-Average response time (waiting + service time) for type 1 job: 17.316624123824337 ms
-Average response time (waiting + service time) for type 2 job: 11.84057709238928 ms
-Average type 1 jobs served per second: 57.747976328953904
-Average type 2 jobs served per second: 84.45534302907973

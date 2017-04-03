@@ -30,6 +30,7 @@ df_final['Time (ms)'] = df['time']
 df_final['Total number of process in queue'] = df['change all'].cumsum(axis=0)
 df_final['Number of type 1 process in queue'] = df['change type 1'].cumsum(axis=0)
 df_final['Number of type 2 process in queue'] = df['change type 2'].cumsum(axis=0)
+df_final[df_final < 0] = 0
 df_final.iloc[::1000, :].plot(x='Time (ms)')
 plt.show()
 

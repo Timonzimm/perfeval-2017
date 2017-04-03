@@ -9,7 +9,7 @@ from simulator import Simulator
 
 fig, axes = plt.subplots(nrows=3, ncols=3)
 
-for i, lambda_ in enumerate(range(50, 251, 25)):
+for i, lambda_ in enumerate(range(105, 114, 1)):
   sim = Simulator(lambda_=lambda_)
   results = sim.simulate(num_run=1)
   _, types_deltas_inq = results[0]
@@ -20,6 +20,7 @@ for i, lambda_ in enumerate(range(50, 251, 25)):
   df_final = pd.DataFrame()
   df_final['Time (ms)'] = df['time']
   df_final['Total number of process in queue'] = df['change all'].cumsum(axis=0)
+  df_final[df_final < 0] = 0
 
   print(int(i/3), int(i%3))
   df_final.iloc[::1000, :].plot(x='Time (ms)', ax=axes[int(i/3), int(i%3)])
