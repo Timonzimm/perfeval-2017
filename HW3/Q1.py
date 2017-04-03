@@ -16,7 +16,7 @@ arrivals_type_1 = [Request.arrival_time[0] for Request in done_requests]
 departures_type_2 = [Request.service_time[1] + Request.service_duration[1] for Request in done_requests]
 
 plt.plot(arrivals_type_1, list(range(1, len(done_requests) + 1)), label="Number of requests arrived")
-plt.plot(departures_type_2, list(range(len(done_requests), 0, -1)), label="Number of requests served")
+plt.plot(departures_type_2, list(range(1, len(done_requests) + 1)), label="Number of requests served")
 plt.legend(loc='best', frameon=False)
 plt.xlabel("Time (ms)")
 plt.show()
