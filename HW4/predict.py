@@ -7,6 +7,9 @@ from keras.layers.core import Dense, Activation, Dropout
 from keras.layers.recurrent import LSTM
 from keras.models import Sequential
 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' #Hide messy TensorFlow warnings
+warnings.filterwarnings("ignore") #Hide messy Numpy warnings
+
 def load_data(filename, seq_len, normalise_window):
   f = open(filename, 'rb').read()
   data = f.decode().split('\n')
