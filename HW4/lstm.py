@@ -57,8 +57,8 @@ def build_model(layers):
   print("> Compilation Time : ", time.time() - start)
   return model
 
-  def predict_point_by_point(model, data):
-    #Predict each timestep given the last sequence of true data, in effect only predicting 1 step ahead each time
-    predicted = model.predict(data)
-    predicted = np.reshape(predicted, (predicted.size,))
-    return predicted
+def predict_point_by_point(model, data):
+  #Predict each timestep given the last sequence of true data, in effect only predicting 1 step ahead each time
+  predicted = model.predict(data)
+  predicted = np.reshape(predicted, (predicted.size,))
+  return predicted
