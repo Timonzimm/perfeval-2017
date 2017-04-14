@@ -1,5 +1,7 @@
 import lstm
 import time
+import matplotlib
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 def plot_results(predicted_data, true_data):
@@ -42,7 +44,7 @@ if __name__=='__main__':
 	    nb_epoch=epochs,
 	    validation_split=0.05)
 
-	predictions = lstm.predict_sequences_multiple(model, X_test, seq_len, 50)
+	predictions = lstm.predict_point_by_point(model, X_test, seq_len, 50)
 	#predicted = lstm.predict_sequence_full(model, X_test, seq_len)
 	#predicted = lstm.predict_point_by_point(model, X_test)        
 
