@@ -48,8 +48,8 @@ def build_model():
     model = Sequential()
 
     model.add(LSTM(
+        50,
         input_dim=1,
-        output_dim=50,
         return_sequences=True))
     model.add(Dropout(0.2))
 
@@ -63,7 +63,7 @@ def build_model():
     model.add(Activation("linear"))
 
     start = time.time()
-    model.compile(loss="mse", optimizer="rmsprop")
+    model.compile(loss="mse", optimizer="rmsprop", metrics=['accuracy'])
     print("> Compilation Time : ", time.time() - start)
     return model
 

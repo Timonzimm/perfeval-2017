@@ -1,6 +1,7 @@
 import lstm
 import time
 import numpy as np
+
 import matplotlib
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
@@ -32,7 +33,8 @@ if __name__=='__main__':
 
   print('> Loading data... ')
 
-  X_train, y_train, X_test, y_test = lstm.load_data('sp500.csv', seq_len, True)
+  X_train, y_train, X_test, y_test = lstm.load_data('m.csv', seq_len, True)
+
 
   print('> Data Loaded. Compiling...')
 
@@ -45,10 +47,10 @@ if __name__=='__main__':
       nb_epoch=epochs,
       validation_split=0.05)
 
-  predicted = lstm.predict_sequences_multiple(model, X_test, seq_len, 50)
-  #predicted = lstm.predict_sequence_full(model, X_test, seq_len)
+  #predicted = lstm.predict_sequences_multiple(model, X_test, seq_len, 10)
+  predicted = lstm.predict_sequence_full(model, X_test, seq_len)
   #predicted = lstm.predict_point_by_point(model, X_test)
 
   print('Training duration (s) : ', time.time() - global_start_time)
-  #plot_results(predicted, y_test)
-  plot_results_multiple(predicted, y_test, 50)
+  plot_results(predicted, y_test)
+  #plot_results_multiple(predicted, y_test, 10)
