@@ -1,5 +1,6 @@
 import lstm
 import time
+import numpy as np
 import matplotlib
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
@@ -18,7 +19,7 @@ def plot_results_multiple(predicted_data, true_data, prediction_len):
   ax.plot(true_data, label='True Data')
   #Pad the list of predictions to shift it in the graph to it's correct start
   for i, data in enumerate(predicted_data):
-      padding = [None for p in range(i * prediction_len)]
+      padding = [np.nan for p in range(i * prediction_len)]
       plt.plot(padding + data, label='Prediction')
       plt.legend()
   plt.show()
