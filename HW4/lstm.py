@@ -44,22 +44,22 @@ def normalise_windows(window_data):
         normalised_data.append(normalised_window)
     return normalised_data
 
-def build_model(layers):
+def build_model():
     model = Sequential()
 
     model.add(LSTM(
-        input_dim=layers[0],
-        output_dim=layers[1],
+        input_dim=1,
+        output_dim=50,
         return_sequences=True))
     model.add(Dropout(0.2))
 
     model.add(LSTM(
-        layers[2],
+        100,
         return_sequences=False))
     model.add(Dropout(0.2))
 
     model.add(Dense(
-        output_dim=layers[3]))
+        output_dim=1))
     model.add(Activation("linear"))
 
     start = time.time()

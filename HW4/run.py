@@ -36,7 +36,7 @@ if __name__=='__main__':
 
   print('> Data Loaded. Compiling...')
 
-  model = lstm.build_model([1, 50, 100, 1])
+  model = lstm.build_model()
 
   model.fit(
       X_train,
