@@ -2,10 +2,6 @@ import keras
 from keras.layers.wrappers import TimeDistributed
 from keras.layers import Dense, LSTM
 
-import pandas as pd
-import matplotlib
-matplotlib.use('TkAgg')
-import matplotlib.pyplot as plt
 import numpy as np
 import itertools as it
 
