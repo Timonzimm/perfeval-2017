@@ -51,7 +51,8 @@ class Data:
 
 batch_size = 10 
 seq_len = 100 
-units = 128 
+units = 128
+dp = 0.2
 
 d = Data(path='m.csv', 
          batch_size=batch_size,
@@ -61,9 +62,9 @@ d = Data(path='m.csv',
 G = d.batch_gen()
 
 model = keras.models.Sequential()
-model.add(LSTM(units, input_shape=(seq_len, 1), return_sequences=True))
-model.add(LSTM(units, input_shape=(seq_len, 1), return_sequences=True))
-model.add(LSTM(units, input_shape=(seq_len, 1), return_sequences=True))
+model.add(LSTM(units, input_shape=(seq_len, 1), return_sequences=True, dropout=dp))
+model.add(LSTM(units, input_shape=(seq_len, 1), return_sequences=True, dropout=dp))
+model.add(LSTM(units, input_shape=(seq_len, 1), return_sequences=True, dropout=dp))
 model.add(TimeDistributed(Dense(1)))
 model.compile(loss='mse', optimizer='adam')
 filepath='models/lstm/mdl.h5'
