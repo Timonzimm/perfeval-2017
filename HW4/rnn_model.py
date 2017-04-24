@@ -65,6 +65,7 @@ model.add(TimeDistributed(Dense(1)))
 model.compile(loss='mse', optimizer='adam')
 filepath='models/lstm/mdl.h5'
 
+
 epoch_save = keras.callbacks.LambdaCallback(
     on_epoch_end=lambda epoch, log: model.save(filepath, overwrite=True))
 
