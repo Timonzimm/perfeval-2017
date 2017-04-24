@@ -162,30 +162,69 @@ def AR_model(train, test):
     tsplot(np.reshape(diff.values.T, (-1)))
     plt.show()
 
-def ARMA_model(train, test):
-    model = SARIMAX(train.values, dates=train.index, order=(9,0,9))
+
+def ARMA_fit(ts):
+    lag_acf = acf(ts, nlags=20)
+    lag_pacf = pacf(ts, nlags=20, method='ols')
+    #Plot ACF: 
+    plt.subplot(121) 
+    plt.plot(lag_acf)
+    plt.axhline(y=0,linestyle='--',color='gray')
+    plt.axhline(y=-1.96/np.sqrt(len(ts)),linestyle='--',color='gray')
+    plt.axhline(y=1.96/np.sqrt(len(ts)),linestyle='--',color='gray')
+    plt.title('Autocorrelation Function')
+    #Plot PACF:
+    plt.subplot(122)
+    plt.plot(lag_pacf)
+    plt.axhline(y=0,linestyle='--',color='gray')
+    plt.axhline(y=-1.96/np.sqrt(len(ts)),linestyle='--',color='gray')
+    plt.axhline(y=1.96/np.sqrt(len(ts)),linestyle='--',color='gray')
+    plt.title('Partial Autocorrelation Function')
+    plt.tight_layout()
+
+    plt.show()
+
+
+def ARMA_model(data, train, test):
+    model = ARMA(data.values, dates=data.index, order=(2,9))
+    fit = model.fit(mxiter=100)
+
+    rng = pd.date_range('2015/4/30 23:00:00', periods=40, freq='H')
+
+    f, stderr, conf = fit.forecast(40, alpha=0.05)
+    f_low = pd.DataFrame(conf[:,0], rng)
+    f_high = pd.DataFrame(conf[:,1], rng)
+    f = pd.DataFrame(f, rng)
+    
+    plt.title('Prediction using Recurrent Neural Net')
+    plt.plot(data[-100::], label='Data given')
+    plt.plot(f, label='Prediction')
+    plt.fill_between(x=rng, y1=f_low.values.reshape(-1), y2=f_high.values.reshape(-1), 
+                     alpha=0.2, color='b', label='Prediction interval')
+    plt.legend()
+    plt.show()
+
+def SARIMAX_model(train, test):
+    model = SARIMAX(train.values, dates=train.index, order=(9,0,9), enforce_stationarity=False,
+                    enforce_invertibility=False, seasonal_order=(9,0,0,0))
     fit = model.fit(mxiter=100)
 
     d1 = test.index[0]
     d2 = test.index[-1]
     
-    f, stderr, conf = fit.forecast(39, alpha=0.05)
-    f_low = pd.DataFrame(conf[:,0], test[0:39].index)
-    f_high = pd.DataFrame(conf[:,1], test[0:39].index)
-    print(conf)    
-
-    predicted = fit.predict(d1, d2)
-    predicted = pd.DataFrame(predicted, test.index)
+    f = fit.forecast(39)
+    f = pd.DataFrame(f, test[0:39].index)
+    #predicted = fit.predict(d1, d2)
+    #predicted = pd.DataFrame(predicted, test.index)
     
     plt.plot(test[0:39])
-    plt.plot(predicted[0:39])
-    plt.plot(f_low, color='yellow')
-    plt.plot(f_high, color='yellow')
+    plt.plot(f)
     plt.show()
 
 data, train, test = get_data()
 
 #infos(data)
 #AR_fit(train, test)
-ARMA_model(train , test)
+ARMA_fit(data)
+ARMA_model(data, train, test)
 
